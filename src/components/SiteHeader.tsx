@@ -113,17 +113,71 @@ export function SiteHeader({ onMenuClick }: { onMenuClick: () => void }) {
 }
 
 export function SiteFooter() {
-  const { isAdmin } = useAuth();
+  const { user, isAdmin } = useAuth();
   return (
-    <footer className="relative z-10 mb-6 mt-8 flex items-center justify-between px-4 sm:px-6">
-      <p className="text-[11px] text-faint">© 2026 Recharge</p>
-      <div className="flex gap-3">
-        <Link to="/orders" className="text-[11px] text-subtle">
-          Orders
-        </Link>
-        <Link to={isAdmin ? "/admin" : "/auth"} className="text-[11px] text-subtle">
-          Admin
-        </Link>
+    <footer className="relative z-10 mt-12 px-4 pb-8 sm:px-6">
+      <div className="glass-panel rounded-3xl p-5 sm:p-6">
+        <div className="grid gap-6 sm:grid-cols-3">
+          <div>
+            <div className="flex items-center gap-2">
+              <div className="brand-gradient grid size-9 place-items-center rounded-xl font-display font-bold text-ink">
+                R
+              </div>
+              <div>
+                <p className="font-display text-sm font-semibold leading-none">Recharge</p>
+                <p className="mt-0.5 text-[10px] uppercase tracking-[0.2em] text-faint">
+                  Instant Top-Up
+                </p>
+              </div>
+            </div>
+            <p className="mt-3 text-[11px] leading-relaxed text-faint">
+              Fast, secure game top-ups delivered straight to your player ID.
+            </p>
+          </div>
+
+          <div>
+            <p className="mb-2 text-[10px] uppercase tracking-wider text-faint">Explore</p>
+            <div className="flex flex-col gap-1.5">
+              <Link to="/" className="text-xs text-subtle">
+                Home
+              </Link>
+              <Link to="/how-it-works" className="text-xs text-subtle">
+                How It Works
+              </Link>
+              <Link to="/about" className="text-xs text-subtle">
+                About Us
+              </Link>
+              <Link to="/contact" className="text-xs text-subtle">
+                Contact Us
+              </Link>
+            </div>
+          </div>
+
+          <div>
+            <p className="mb-2 text-[10px] uppercase tracking-wider text-faint">Account</p>
+            <div className="flex flex-col gap-1.5">
+              {user ? (
+                <Link to="/orders" className="text-xs text-subtle">
+                  My Orders
+                </Link>
+              ) : (
+                <Link to="/auth" className="text-xs text-subtle">
+                  Sign in
+                </Link>
+              )}
+              {isAdmin ? (
+                <Link to="/admin" className="text-xs text-cyan">
+                  Admin panel
+                </Link>
+              ) : null}
+            </div>
+          </div>
+        </div>
+
+        <div className="mt-6 flex flex-wrap items-center justify-between gap-2 border-t border-white/10 pt-4">
+          <p className="text-[11px] text-faint">© 2026 Recharge. All rights reserved.</p>
+          <p className="text-[11px] text-faint">Instant delivery · Secure payments</p>
+        </div>
       </div>
     </footer>
   );

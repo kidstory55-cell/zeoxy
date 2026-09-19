@@ -397,6 +397,11 @@ function PackagesTab() {
       toast.error("Label is required");
       return;
     }
+    const coins = Number(form.smile_coin_cost);
+    if (Number.isNaN(coins) || coins < 0) {
+      toast.error("Smile Coin cost must be zero or more");
+      return;
+    }
     const payload = {
       game_id: gameId,
       label: form.label.trim(),

@@ -72,7 +72,7 @@ function Label({ children }: { children: React.ReactNode }) {
 function AdminPage() {
   const { user, isAdmin, ready } = useAuth();
   const navigate = useNavigate();
-  const [tab, setTab] = useState<Tab>("Games");
+  const [tab, setTab] = useState<Tab>("Dashboard");
 
   useEffect(() => {
     if (ready && user && !isAdmin) {
@@ -107,11 +107,13 @@ function AdminPage() {
       </div>
 
       <div className="mt-5">
+        {tab === "Dashboard" && <DashboardTab />}
         {tab === "Games" && <GamesTab />}
         {tab === "Packages" && <PackagesTab />}
         {tab === "Banners" && <BannersTab />}
         {tab === "Orders" && <OrdersTab />}
         {tab === "Clients" && <ClientsTab />}
+        {tab === "Smile Coin" && <SmileCoinTab />}
         {tab === "Discount" && <DiscountTab />}
         {tab === "Admins" && <AdminsTab />}
       </div>

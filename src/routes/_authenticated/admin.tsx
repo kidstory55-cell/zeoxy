@@ -610,7 +610,49 @@ function BannersTab() {
               {games.map((g) => <option key={g.id} value={g.id}>{g.name}</option>)}
             </select>
           </label>
-          <label className="sm:col-span-2"><Label>Image URL</Label><input className={field} value={form.image_url} onChange={(e) => set("image_url", e.target.value)} /></label>
+          <div className="sm:col-span-2">
+            <Label>Banner image</Label>
+            <div className="flex items-center gap-3">
+              {form.image_url ? (
+                <img
+                  src={form.image_url}
+                  alt="Banner preview"
+                  className="h-16 w-28 shrink-0 rounded-xl object-cover"
+                />
+              ) : (
+                <div className="h-16 w-28 shrink-0 rounded-xl bg-muted" />
+              )}
+              <div className="min-w-0 flex-1">
+                <input
+                  type="file"
+                  accept="image/*"
+                  disabled={uploading}
+                  onChange={async (e) => {
+                    const file = e.target.files?.[0];
+                    e.target.value = "";
+                    if (!file) return;
+                    setUploading(true);
+                    try {
+                      const url = await uploadStoreImage(file);
+                      set("image_url", url);
+                      toast.success("Image uploaded");
+                    } catch {
+                      toast.error("Could not upload that image");
+                    }
+                    setUploading(false);
+                  }}
+                  className="w-full text-xs file:mr-3 file:rounded-lg file:border-0 file:bg-muted file:px-3 file:py-2 file:text-xs"
+                />
+                <input
+                  className={`${field} mt-2`}
+                  value={form.image_url}
+                  onChange={(e) => set("image_url", e.target.value)}
+                  placeholder="…or paste an image link"
+                />
+              </div>
+            </div>
+            {uploading ? <p className="mt-1 text-[11px] text-faint">Uploading…</p> : null}
+          </div>
           <label><Label>Sort order</Label><input type="number" className={field} value={form.sort_order} onChange={(e) => set("sort_order", e.target.value)} /></label>
           <label className="flex items-center gap-2 text-xs"><input type="checkbox" checked={form.is_active} onChange={(e) => set("is_active", e.target.checked)} /> Active</label>
         </div>

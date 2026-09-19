@@ -369,16 +369,20 @@ function PackagesTab() {
     enabled: Boolean(gameId),
   });
 
+  const { data: rate } = useQuery(activeCoinRateQuery());
+  const { data: settings } = useQuery(settingsQuery());
+
   type PackForm = {
     label: string;
     amount: string;
     price: string;
+    smile_coin_cost: string;
     bonus_text: string;
     is_popular: boolean;
     is_active: boolean;
     sort_order: string;
   };
-  const empty: PackForm = { label: "", amount: "0", price: "0", bonus_text: "", is_popular: false, is_active: true, sort_order: "0" };
+  const empty: PackForm = { label: "", amount: "0", price: "0", smile_coin_cost: "0", bonus_text: "", is_popular: false, is_active: true, sort_order: "0" };
   const [form, setForm] = useState<PackForm>({ ...empty });
   const [editing, setEditing] = useState<string | null>(null);
   const set = <K extends keyof PackForm>(k: K, v: PackForm[K]) =>

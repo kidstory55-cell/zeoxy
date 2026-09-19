@@ -47,11 +47,13 @@ export const Route = createFileRoute("/_authenticated/admin")({
 });
 
 const TABS = [
+  "Dashboard",
   "Games",
   "Packages",
   "Banners",
   "Orders",
   "Clients",
+  "Smile Coin",
   "Discount",
   "Admins",
 ] as const;

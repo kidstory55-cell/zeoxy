@@ -506,7 +506,12 @@ function PackagesTab() {
           <div key={p.id} className="glass-panel flex items-center justify-between gap-3 rounded-2xl p-3">
             <div className="min-w-0">
               <p className="truncate font-display text-sm font-semibold">{p.label}</p>
-              <p className="text-[11px] text-faint">{money(p.price)} {p.is_popular ? "· popular" : ""} {p.is_active ? "" : "· hidden"}</p>
+              <p className="text-[11px] text-faint">
+                {money(customerPrice(p, rate, settings?.discount_percent ?? 0))}
+                {p.smile_coin_cost ? ` · ${p.smile_coin_cost} coins` : ""}
+                {p.is_popular ? " · popular" : ""}
+                {p.is_active ? "" : " · hidden"}
+              </p>
             </div>
             <div className="flex shrink-0 gap-2">
               <button className={btn} onClick={() => edit(p)}>Edit</button>

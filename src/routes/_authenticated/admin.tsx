@@ -402,6 +402,7 @@ function PackagesTab() {
       label: form.label.trim(),
       amount: Number(form.amount) || 0,
       price: Number(form.price) || 0,
+      smile_coin_cost: Number(form.smile_coin_cost) || 0,
       bonus_text: form.bonus_text || null,
       is_popular: form.is_popular,
       is_active: form.is_active,

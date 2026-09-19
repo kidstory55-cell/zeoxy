@@ -436,6 +436,7 @@ function PackagesTab() {
       label: p.label,
       amount: String(p.amount),
       price: String(p.price),
+      smile_coin_cost: String(p.smile_coin_cost ?? 0),
       bonus_text: p.bonus_text ?? "",
       is_popular: p.is_popular,
       is_active: p.is_active,

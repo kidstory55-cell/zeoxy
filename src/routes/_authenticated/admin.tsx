@@ -7,17 +7,21 @@ import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
 import {
   ORDER_STATUSES,
+  activeCoinRateQuery,
   bannersQuery,
+  coinRatesQuery,
   gamesQuery,
   money,
   ordersQuery,
   packsQuery,
   settingsQuery,
-  uploadGameImage,
+  uploadStoreImage,
   type Banner,
   type Game,
+  type Order,
   type Pack,
 } from "@/lib/store";
+import { coinRateOf, computePricing, customerPrice, round2, type CoinRate } from "@/lib/pricing";
 import {
   addAdminByEmail,
   listAdminInvites,
@@ -25,6 +29,8 @@ import {
   listClients,
   removeAdmin,
 } from "@/lib/admin.functions";
+
+const uploadGameImage = uploadStoreImage;
 
 export const Route = createFileRoute("/_authenticated/admin")({
   head: () => ({

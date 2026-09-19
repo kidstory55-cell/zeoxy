@@ -468,6 +468,33 @@ function PackagesTab() {
           <label className="flex items-center gap-2 text-xs"><input type="checkbox" checked={form.is_popular} onChange={(e) => set("is_popular", e.target.checked)} /> Popular</label>
           <label className="flex items-center gap-2 text-xs"><input type="checkbox" checked={form.is_active} onChange={(e) => set("is_active", e.target.checked)} /> Active</label>
         </div>
+        {(() => {
+          const preview = computePricing(
+            { price: Number(form.price) || 0, smile_coin_cost: Number(form.smile_coin_cost) || 0 },
+            rate,
+          );
+          const shown = customerPrice(
+            { price: Number(form.price) || 0, smile_coin_cost: Number(form.smile_coin_cost) || 0 },
+            rate,
+            settings?.discount_percent ?? 0,
+          );
+          return (
+            <div className="mt-4 rounded-xl border border-white/10 bg-white/5 p-3 text-[11px] text-faint">
+              <p className="mb-1 font-display text-xs font-semibold text-subtle">Price preview</p>
+              {rate ? (
+                <>
+                  <p>Coin rate: Rs. {round2(rate.coin_rate)} per coin</p>
+                  <p>Real cost: {money(preview.real_cost)} · Profit {preview.profit_percent}%</p>
+                </>
+              ) : (
+                <p>No active Smile Coin rate — the fallback price is used.</p>
+              )}
+              <p className="mt-1 font-display text-sm font-semibold text-ink">
+                Customer pays {money(shown)}
+              </p>
+            </div>
+          );
+        })()}
         <div className="mt-4 flex gap-2">
           <button className={primary} onClick={save}>{editing ? "Save changes" : "Add package"}</button>
           {editing ? <button className={btn} onClick={() => { setEditing(null); setForm({ ...empty }); }}>Cancel</button> : null}

@@ -542,6 +542,7 @@ function BannersTab() {
   const empty: BannerForm = { title: "", subtitle: "", badge: "Featured", image_url: "", game_id: "", is_active: true, sort_order: "0" };
   const [form, setForm] = useState<BannerForm>({ ...empty });
   const [editing, setEditing] = useState<string | null>(null);
+  const [uploading, setUploading] = useState(false);
   const set = <K extends keyof BannerForm>(k: K, v: BannerForm[K]) =>
     setForm((f) => ({ ...f, [k]: v }));
 

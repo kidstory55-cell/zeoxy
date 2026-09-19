@@ -461,7 +461,8 @@ function PackagesTab() {
         <div className="mt-3 grid gap-3 sm:grid-cols-2">
           <label><Label>Label</Label><input className={field} value={form.label} onChange={(e) => set("label", e.target.value)} placeholder="500 Gems" /></label>
           <label><Label>Amount</Label><input type="number" className={field} value={form.amount} onChange={(e) => set("amount", e.target.value)} /></label>
-          <label><Label>Price (₹)</Label><input type="number" className={field} value={form.price} onChange={(e) => set("price", e.target.value)} /></label>
+          <label><Label>Smile Coin cost</Label><input type="number" min={0} step="0.01" className={field} value={form.smile_coin_cost} onChange={(e) => set("smile_coin_cost", e.target.value)} placeholder="65" /></label>
+          <label><Label>Fallback price (Rs.)</Label><input type="number" className={field} value={form.price} onChange={(e) => set("price", e.target.value)} /></label>
           <label><Label>Sort order</Label><input type="number" className={field} value={form.sort_order} onChange={(e) => set("sort_order", e.target.value)} /></label>
           <label className="sm:col-span-2"><Label>Bonus text</Label><input className={field} value={form.bonus_text} onChange={(e) => set("bonus_text", e.target.value)} placeholder="+50 bonus" /></label>
           <label className="flex items-center gap-2 text-xs"><input type="checkbox" checked={form.is_popular} onChange={(e) => set("is_popular", e.target.checked)} /> Popular</label>
